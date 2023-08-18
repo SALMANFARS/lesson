@@ -5,7 +5,7 @@ import "./App.css";
 
 import { useAppSelector, useAppDispatch } from "./hooks/hooks";
 
-import { addUser, decrement, increment, setText } from "./reducers/counterSlice";
+import { addUser, deleteUser, setText } from "./reducers/counterSlice";
 
 function App() {
   const todo = useAppSelector((state) => state.counterSlice.todo);

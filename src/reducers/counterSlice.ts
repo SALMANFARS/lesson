@@ -37,20 +37,24 @@ export const counterSlice = createSlice({
       state.text = action.payload;
     },
     addUser: (state, action) => {
-      action.payload.preventDefault()
+      action.payload.preventDefault();
       let newObj = {
         id: Date.now(),
         title: state.text,
-        complete:false
-        
-      }
+        complete: false,
+      };
       state.todo = [...state.todo, newObj];
-      state.text= ""
+      state.text = "";
+    },
+    deleteUser: (state, action) => {
+      state.todo = state.todo.filter((elem) => {
+        return elem.id!=action.payload
+      })
     }
   },
 });
 
-export const { setText, addUser } = counterSlice.actions;
+export const { setText, addUser,deleteUser } = counterSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectCount = (state: RootState) => state.counterSlice;
