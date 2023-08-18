@@ -48,13 +48,21 @@ export const counterSlice = createSlice({
     },
     deleteUser: (state, action) => {
       state.todo = state.todo.filter((elem) => {
-        return elem.id!=action.payload
+        return elem.id != action.payload;
+      });
+    },
+    completeUser: (state, action) => {
+      state.todo = state.todo.map((elem) => {
+        if (elem.id == action.payload) {
+          elem.complete = !elem.complete
+        }
+        return elem
       })
     }
   },
 });
 
-export const { setText, addUser,deleteUser } = counterSlice.actions;
+export const { setText, addUser,deleteUser,completeUser } = counterSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectCount = (state: RootState) => state.counterSlice;

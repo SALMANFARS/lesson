@@ -5,7 +5,7 @@ import "./App.css";
 
 import { useAppSelector, useAppDispatch } from "./hooks/hooks";
 
-import { addUser, deleteUser, setText } from "./reducers/counterSlice";
+import { addUser, completeUser, deleteUser, setText } from "./reducers/counterSlice";
 
 function App() {
   const todo = useAppSelector((state) => state.counterSlice.todo);
@@ -31,8 +31,14 @@ function App() {
           {todo.map((elem) => {
             return (
               <div key={elem.id}>
-                <h1>{elem.title}</h1>
-                <button onClick={() => dispatch(deleteUser(elem.id))}>Delete</button>
+                {elem.complete ? <h1 style={{color:"red",textDecoration:"line-through"}}>{elem.title}</h1> : <h1>{elem.title}</h1>}
+                <input
+                  type="checkbox"
+                  onClick={() => dispatch(completeUser(elem.id))}
+                />
+                <button onClick={() => dispatch(deleteUser(elem.id))}>
+                  Delete
+                </button>
               </div>
             );
           })}
